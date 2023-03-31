@@ -1,13 +1,19 @@
 name: build-wiki
 on:
-  - push
+  push:
+    branches: ["master"]
 jobs:
   build-action: 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
         with:
-          python-version: 3.x
-      - run: pip install mkdocs
-      - run: mkdocs new my-project
+          source: ./content
+          destination: ./_site
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
