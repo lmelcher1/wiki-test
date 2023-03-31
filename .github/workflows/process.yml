@@ -1,7 +1,7 @@
 name: build-wiki
 on:
     - push
-jobs
+jobs:
     build-action: 
         runs-on: ubuntu-latest
         steps:
